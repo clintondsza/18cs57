@@ -1,0 +1,39 @@
+// at client side 
+import java.net.*;
+import java.util.Scanner;
+public class UDPClient
+{
+public static void main(String[] args) throws Exception
+{
+System.out.println("Sender");
+DatagramSocket ds = new DatagramSocket();
+Scanner scanner = new Scanner(System.in);
+System.out.println("\nEnter the Message : ");
+while(true)
+{
+String msg = scanner.nextLine();
+InetAddress ip = InetAddress.getByName("127.0.0.1");
+DatagramPacket dp = new DatagramPacket(msg.getBytes(), msg.length(), ip, 3000);
+ds.send(dp);
+}
+}
+} 
+
+// at server side
+import java.net.*;
+public class UDPServer //receiver
+{
+public static void main(String[] args) throws Exception
+{
+byte[] buf=new byte[1024];
+System.out.println("Receiver");
+DatagramSocket ds= new DatagramSocket(3000);
+while(true)
+{
+DatagramPacket dp=new DatagramPacket(buf,1024);
+ds.receive(dp);
+String msg=new String(dp.getData(),0,dp.getLength());
+System.out.println(msg);
+}
+}
+}
