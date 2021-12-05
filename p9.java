@@ -45,3 +45,15 @@ in = new DataInputStream(socket.getInputStream());
 out = new DataOutputStream(socket.getOutputStream());
 String fileName = in.readUTF();
 System.out.println("File Requested is : " + fileName);
+byte[] filedata = Files.readAllBytes(Paths.get(fileName));
+String fileContent = new String(filedata);
+out.writeUTF(fileContent.toString());
+System.out.println("FILE SENT SUCCESSFULLY");
+}
+catch (Exception e)
+{
+System.out.println(e.getMessage());
+out.writeUTF("FILE DOESN'T EXISTS");
+}
+}
+}
