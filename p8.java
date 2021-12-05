@@ -56,3 +56,6 @@ for (int sn = 1; sn <= num_ver; sn++)
 {
 for (int dn = 1; dn <= num_ver; dn++)
 { 
+scanner.close();
+}
+} 
